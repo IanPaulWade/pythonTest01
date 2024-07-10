@@ -12,8 +12,8 @@ import metoc_derivatives as md
 
 # %%
 # data input
-H = 11.65
-T = 14.4
+H = 5.65
+T = 10.4
 
 # derive wave steepness (individual or seastate)
 S = md.steepness_from_ht(H, T)
