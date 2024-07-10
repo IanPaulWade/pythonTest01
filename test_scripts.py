@@ -53,3 +53,17 @@ print('U = ' f"{U:0.2f}" + ' m/s :')
 print('V = ' f"{V:0.2f}" + ' m/s :')
 print('Mag = ' f"{mg:0.2f}" + ' m/s :')
 print('Dir = ' f"{dr:0.1f}" + ' degT :')
+
+
+# %%
+# data input
+MG = 1.0
+DR = 45
+DIR_CONV = 'V'
+
+# convert u, v to magnitude and direction (2 dir conventions available)
+u, v = md.md_to_uv(MG, DR, DIR_CONV)
+print('MG = ' f"{MG:0.2f}" + ' m/s :')
+print('DR = ' f"{DR:0.1f}" + ' degT :')
+print('u = ' f"{u:0.2f}" + ' m/s :')
+print('v = ' f"{v:0.2f}" + ' m/s :')

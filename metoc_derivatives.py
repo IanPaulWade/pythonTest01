@@ -64,6 +64,30 @@ def uv_to_md(u, v, dir_conv):
         dr = ((180/pi) * math.atan2(u, v)) % 360
     else:
         dr = -999
+        mg = -999
         print("Enter 'M' (for Magnitude) or 'V' (for Vector)")
 
     return mg, dr
+
+
+def md_to_uv(mg, dr, dir_conv):
+    """
+    convert magnitude and direction to U, V vectors
+    includes directional convention options ...
+    V = vector (towards - consistent with U, V vectors)
+    M = Meteorological (from - reversal of U, V vectors)
+    """
+    dir_conv = dir_conv.upper()
+
+    if dir_conv == 'M':
+        u = abs(mg) * math.sin((pi / 180) * dr)
+        v = abs(mg) * math.cos((pi / 180) * dr)
+    elif dir_conv == 'V':
+        u = abs(mg) * math.sin((pi / 180) * dr)
+        v = abs(mg) * math.cos((pi / 180) * dr)
+    else:
+        u = -999
+        v = -999
+        print("Enter 'M' (for Magnitude) or 'V' (for Vector)")
+
+    return u, v
