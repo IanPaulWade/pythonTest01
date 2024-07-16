@@ -8,7 +8,6 @@ g = 9.81
 pi = 3.142
 
 
-# WAVES ######################################################################
 # wave steepness, given height and period
 def steepness_from_ht(h, t):
     """ derive steepness (individual or seastate) from height and period """
@@ -30,7 +29,19 @@ def height_from_ts(t, s):
     return h
 
 
-# UNIT CONVERSIONS ###########################################################
+# wave length, given period and depth
+def wavelength_from_td(t, d):
+    L0 = (g * math.pow(t, 2)) / (2 * pi)
+    guess = L0
+    L = (g * math.pow(t, 2)) / (2 * pi) * math.tanh((2 * pi) * (d / guess))
+    diff = abs(L - guess)
+    while diff > 0.01:
+        diff = abs(L - guess)
+        guess = L + (0.5 * diff)
+        L = (g * math.pow(t, 2)) / (2 * pi) * math.tanh((2 * pi) * (d / guess))
+    return L0, L
+
+
 # convert speeds (m/s to knots)
 def mps_to_knots(spd_mps):
     """ convert speed in m/s to knots """
@@ -45,8 +56,6 @@ def knots_to_mps(spd_kts):
     return spd_mps
 
 
-# VECTOR CONVERSIONS #########################################################
-# convert u / v to magnitude / direction
 def uv_to_md(u, v, dir_conv):
     """
     convert U, V vectors to magnitude and direction
@@ -59,9 +68,9 @@ def uv_to_md(u, v, dir_conv):
     mg = math.sqrt(math.pow(u, 2) + math.pow(v, 2))
 
     if dir_conv == 'M':
-        dr = ((180/pi) * math.atan2(-u, -v)) % 360
+        dr = ((180 / pi) * math.atan2(-u, -v)) % 360
     elif dir_conv == 'V':
-        dr = ((180/pi) * math.atan2(u, v)) % 360
+        dr = ((180 / pi) * math.atan2(u, v)) % 360
     else:
         dr = -999
         mg = -999

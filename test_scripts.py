@@ -7,13 +7,14 @@ import metoc_derivatives as md
 # the following requires a restart of Spyder kernal in IPython Console
 # following any change of default environment via preferences
 
-# from platform import python_version
-# print(f"Python version: {python_version()}")
+from platform import python_version
+print(f"Python version: {python_version()}")
 
 # %%
 # data input
-H = 15.65
-T = 11.4
+H = 5.65
+T = 9.8
+D = 35.0
 
 # derive wave steepness (individual or seastate)
 S = md.steepness_from_ht(H, T)
@@ -26,6 +27,15 @@ print('Original Tz = ' + f"{T:0.1f}" + ' s : New Tz = ' + f"{newT:0.1f}" + ' s')
 # calculate H from T and S (individual or seastate)
 newH = md.height_from_ts(T, S)
 print('Original Hs = ' + f"{H:0.2f}" + ' m : New Hs = ' + f"{newH:0.1f}" + ' m')
+
+# calculate wavelength from T and D (any depth)
+L0,L = md.wavelength_from_td(T, D)
+print('Wavelength (deep) = ' + f"{L0:0.1f}" + ' m')
+print('Wavelength (D = ' + f"{D:0.1f}" + ' m) = ' + f"{L:0.1f}" + ' m')
+
+
+
+
 
 # %%
 # data input
